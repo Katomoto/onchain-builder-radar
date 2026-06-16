@@ -1,0 +1,14 @@
+{
+  "name": "onchain-builder-radar",
+  "version": "1.0.0",
+  "description": "Daily AI-powered tracker of the most active onchain developers on GitHub",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "node-fetch": "2.7.0"
+  },
+  "author": "Katomoto",
+  "license": "MIT"
+}

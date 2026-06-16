@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onchain Builder Radar</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --bg: #050510;
+    --bg2: #0a0a1a;
+    --card: #0d0d20;
+    --border: rgba(99,102,241,0.2);
+    --accent: #6366f1;
+    --accent2: #22d3ee;
+    --accent3: #a78bfa;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --success: #10b981;
+    --warning: #f59e0b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; overflow-x:hidden; }
+  #stars { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+  .container { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 20px; }
+  header { text-align:center; padding:60px 20px 40px; }
+  .logo { font-family:'Orbitron',monospace; font-size:clamp(28px,5vw,52px); font-weight:900; background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:2px; }
+  .tagline { color:var(--muted); font-size:14px; margin-top:8px; letter-spacing:3px; text-transform:uppercase; }
+  .live-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); color:var(--success); padding:4px 12px; border-radius:20px; font-size:12px; margin-top:16px; }
+  .live-dot { width:6px; height:6px; border-radius:50%; background:var(--success); animation:pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; margin:40px 0; }
+  .stat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; transition:border-color 0.3s; }
+  .stat-card:hover { border-color:var(--accent); }
+  .stat-value { font-family:'Orbitron',monospace; font-size:28px; font-weight:700; color:var(--accent2); }
+  .stat-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+  .section-title { font-family:'Orbitron',monospace; font-size:18px; color:var(--accent3); margin:40px 0 20px; display:flex; align-items:center; gap:10px; }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+  .filter-btn { background:transparent; border:1px solid var(--border); color:var(--muted); padding:6px 16px; border-radius:20px; font-size:12px; cursor:pointer; transition:all 0.2s; font-family:'Inter',sans-serif; }
+  .filter-btn:hover, .filter-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .builders-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:20px; }
+  .builder-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; transition:all 0.3s; cursor:pointer; position:relative; overflow:hidden; }
+  .builder-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),var(--accent2)); opacity:0; transition:opacity 0.3s; }
+  .builder-card:hover { border-color:rgba(99,102,241,0.5); transform:translateY(-2px); }
+  .builder-card:hover::before { opacity:1; }
+  .builder-card.rank-1 { border-color:rgba(251,191,36,0.4); }
+  .builder-card.rank-1::before { background:linear-gradient(90deg,#f59e0b,#fbbf24); opacity:1; }
+  .builder-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .builder-rank { font-family:'Orbitron',monospace; font-size:11px; color:var(--muted); min-width:24px; }
+  .builder-rank.gold { color:#fbbf24; }
+  .builder-avatar { width:44px; height:44px; border-radius:50%; border:2px solid var(--border); }
+  .builder-name { font-weight:600; font-size:15px; }
+  .builder-link { color:var(--accent2); text-decoration:none; font-size:12px; }
+  .builder-link:hover { text-decoration:underline; }
+  .score-badge { margin-left:auto; background:rgba(99,102,241,0.15); border:1px solid rgba(99,102,241,0.3); color:var(--accent3); padding:4px 10px; border-radius:8px; font-family:'Orbitron',monospace; font-size:14px; font-weight:700; }
+  .score-badge.high { background:rgba(16,185,129,0.15); border-color:rgba(16,185,129,0.3); color:var(--success); }
+  .score-bar { height:4px; background:rgba(255,255,255,0.05); border-radius:2px; margin-bottom:16px; overflow:hidden; }
+  .score-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:2px; transition:width 1s ease; }
+  .builder-metrics { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:12px; }
+  .metric { background:rgba(255,255,255,0.03); border-radius:8px; padding:8px; text-align:center; }
+  .metric-val { font-family:'Orbitron',monospace; font-size:14px; font-weight:700; color:var(--accent2); }
+  .metric-label { font-size:10px; color:var(--muted); margin-top:2px; }
+  .topics { display:flex; flex-wrap:wrap; gap:4px; margin-top:8px; }
+  .topic { background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.2); color:var(--accent3); padding:2px 8px; border-radius:4px; font-size:10px; }
+  .chart-section { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; margin:24px 0; }
+  .chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media(max-width:700px){ .chart-grid { grid-template-columns:1fr; } }
+  canvas { max-height:240px; }
+  .ai-report { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px; margin:24px 0; }
+  .ai-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .ai-icon { font-size:24px; }
+  .ai-title { font-family:'Orbitron',monospace; font-size:14px; color:var(--accent2); }
+  .ai-content { color:#94a3b8; line-height:1.8; font-size:14px; white-space:pre-wrap; }
+  .reports-list { display:grid; gap:8px; }
+  .report-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; transition:border-color 0.2s; cursor:pointer; }
+  .report-item:hover { border-color:var(--accent); }
+  .report-date { font-family:'Orbitron',monospace; font-size:12px; color:var(--accent2); }
+  .report-type { font-size:11px; padding:2px 8px; border-radius:4px; }
+  .report-type.weekly { background:rgba(245,158,11,0.15); color:#fbbf24; }
+  .report-type.daily { background:rgba(99,102,241,0.1); color:var(--accent3); }
+  .report-meta { font-size:12px; color:var(--muted); }
+  .loading { text-align:center; padding:60px; color:var(--muted); }
+  .loading-spinner { width:40px; height:40px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 16px; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:12px; border-top:1px solid var(--border); margin-top:60px; }
+  .footer-accent { color:var(--accent2); }
+  .wallet-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(34,211,238,0.08); border:1px solid rgba(34,211,238,0.2); color:var(--accent2); padding:4px 12px; border-radius:20px; font-size:11px; margin-top:8px; font-family:'Orbitron',monospace; }
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="container">
+  <header>
+    <div class="logo">⛓ ONCHAIN BUILDER RADAR</div>
+    <div class="tagline">Daily Intelligence on the Most Active Web3 Developers</div>
+    <div class="live-badge"><span class="live-dot"></span> Auto-updated daily via GitHub Actions</div>
+    <br>
+    <div id="walletBadge" class="wallet-badge" style="display:none">🔗 <span id="walletAddr"></span></div>
+  </header>
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="stat-value" id="statBuilders">—</div><div class="stat-label">Builders Tracked</div></div>
+    <div class="stat-card"><div class="stat-value" id="statCommits">—</div><div class="stat-label">Commits Today</div></div>
+    <div class="stat-card"><div class="stat-value" id="statStars">—</div><div class="stat-label">Total Stars</div></div>
+    <div class="stat-card"><div class="stat-value" id="statReports">—</div><div class="stat-label">Reports Archive</div></div>
+    <div class="stat-card"><div class="stat-value" id="statAvgScore">—</div><div class="stat-label">Avg Builder Score</div></div>
+  </div>
+  <div class="section-title">📊 Score & Activity Charts</div>
+  <div class="chart-section">
+    <div class="chart-grid">
+      <div><canvas id="scoreChart"></canvas></div>
+      <div><canvas id="langChart"></canvas></div>
+    </div>
+  </div>
+  <div class="section-title">🔥 Top Onchain Builders Today</div>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterBuilders('all', this)">All Chains</button>
+    <button class="filter-btn" onclick="filterBuilders('base', this)">Base</button>
+    <button class="filter-btn" onclick="filterBuilders('ethereum', this)">Ethereum</button>
+    <button class="filter-btn" onclick="filterBuilders('solana', this)">Solana</button>
+    <button class="filter-btn" onclick="filterBuilders('defi', this)">DeFi</button>
+  </div>
+  <div class="builders-grid" id="buildersGrid">
+    <div class="loading"><div class="loading-spinner"></div>Loading builder data...</div>
+  </div>
+  <div class="section-title">🤖 AI Analysis</div>
+  <div class="ai-report">
+    <div class="ai-header">
+      <span class="ai-icon">🧠</span>
+      <span class="ai-title">OpenRouter Auto Analysis</span>
+      <span id="reportTypeLabel" style="margin-left:auto;font-size:11px;color:var(--muted)"></span>
+    </div>
+    <div class="ai-content" id="aiContent">Loading AI report...</div>
+  </div>
+  <div class="section-title">📁 Reports Archive</div>
+  <div class="reports-list" id="reportsList">
+    <div class="loading"><div class="loading-spinner"></div>Loading archive...</div>
+  </div>
+  <footer>
+    <div>Built by <span class="footer-accent">Katomoto</span> · Powered by GitHub Actions + OpenRouter AI</div>
+    <div style="margin-top:4px">Data refreshed daily at 08:00 UTC · Archive growing every day</div>
+    <div id="lastUpdated" style="margin-top:4px;font-size:11px"></div>
+  </footer>
+</div>
+<script>
+const REPO = "Katomoto/onchain-builder-radar";
+const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
+let allBuilders = [];
+let scoreChart, langChart;
+
+async function loadLatestReport() {
+  try {
+    const indexRes = await fetch(`${RAW}/reports/index.json?t=${Date.now()}`);
+    if (!indexRes.ok) throw new Error("No index");
+    const index = await indexRes.json();
+    document.getElementById("statReports").textContent = index.reports?.length || 0;
+    if (index.last_updated) {
+      document.getElementById("lastUpdated").textContent = `Last updated: ${new Date(index.last_updated).toLocaleString()}`;
+    }
+    renderArchive(index.reports || []);
+    if (index.reports?.length > 0) {
+      const latest = index.reports[0];
+      const dateStr = latest.date + (latest.type === "weekly" ? "-weekly" : "");
+      await loadReport(dateStr, latest.type);
+    }
+  } catch(e) {
+    document.getElementById("buildersGrid").innerHTML = `<div class="loading" style="color:#ef4444">No reports yet. Run GitHub Actions to generate the first report!</div>`;
+    document.getElementById("aiContent").textContent = "No AI report generated yet.";
+    document.getElementById("reportsList").innerHTML = `<div class="loading">No archive yet.</div>`;
+  }
+}
+
+async function loadReport(dateStr, type) {
+  try {
+    const res = await fetch(`${RAW}/reports/${dateStr}.json?t=${Date.now()}`);
+    if (!res.ok) throw new Error("Report not found");
+    const report = await res.json();
+    allBuilders = report.builders || [];
+    document.getElementById("statBuilders").textContent = report.stats?.builders_tracked || allBuilders.length;
+    document.getElementById("statCommits").textContent = report.stats?.total_commits_today || 0;
+    document.getElementById("statStars").textContent = (report.stats?.total_stars || 0).toLocaleString();
+    document.getElementById("statAvgScore").textContent = report.stats?.avg_score || 0;
+    if (report.wallet) {
+      const short = report.wallet.slice(0,6) + "..." + report.wallet.slice(-4);
+      document.getElementById("walletAddr").textContent = short;
+      document.getElementById("walletBadge").style.display = "inline-flex";
+    }
+    renderBuilders(allBuilders);
+    renderCharts(allBuilders, report.stats?.top_languages || []);
+    document.getElementById("aiContent").textContent = report.ai_report || "No AI report.";
+    document.getElementById("reportTypeLabel").textContent = type === "weekly" ? "📅 Weekly Report" : "📆 Daily Report";
+  } catch(e) { console.error(e); }
+}
+
+function renderBuilders(builders) {
+  const grid = document.getElementById("buildersGrid");
+  if (!builders.length) { grid.innerHTML = `<div class="loading">No builders found.</div>`; return; }
+  grid.innerHTML = builders.map((b, i) => `
+    <div class="builder-card ${i===0?'rank-1':''}" onclick="window.open('https://github.com/${b.username||''}','_blank')">
+      <div class="builder-header">
+        <span class="builder-rank ${i===0?'gold'}">#${i+1}</span>
+        <img class="builder-avatar" src="${b.avatar||'https://github.com/ghost.png'}" alt="${b.username}" onerror="this.src='https://github.com/ghost.png'">
+        <div>
+          <div class="builder-name">${b.username}</div>
+          <a class="builder-link" href="https://github.com/${b.username}" target="_blank" onclick="event.stopPropagation()">github.com/${b.username}</a>
+        </div>
+        <div class="score-badge ${b.score>=60?'high':''}">${b.score}</div>
+      </div>
+      <div class="score-bar"><div class="score-fill" style="width:${b.score}%"></div></div>
+      <div class="builder-metrics">
+        <div class="metric"><div class="metric-val">${(b.totalStars||0).toLocaleString()}</div><div class="metric-label">Stars</div></div>
+        <div class="metric"><div class="metric-val">${b.commitsToday||0}</div><div class="metric-label">Commits</div></div>
+        <div class="metric"><div class="metric-val">${b.totalForks||0}</div><div class="metric-label">Forks</div></div>
+      </div>
+      <div class="topics">${(b.topics||[]).slice(0,6).map(t=>`<span class="topic">${t}</span>`).join("")}</div>
+      ${b.topLanguage?`<div style="margin-top:8px;font-size:11px;color:var(--muted)">⚡ ${b.topLanguage}</div>`:""}
+    </div>
+  `).join("");
+}
+
+function filterBuilders(topic, btn) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  if (topic === "all") { renderBuilders(allBuilders); return; }
+  const filtered = allBuilders.filter(b => (b.topics||[]).some(t => t.includes(topic)) || (b.repos||[]).some(r => r.includes(topic)));
+  renderBuilders(filtered.length ? filtered : allBuilders);
+}
+
+function renderCharts(builders, topLangs) {
+  const ctx1 = document.getElementById("scoreChart").getContext("2d");
+  const ctx2 = document.getElementById("langChart").getContext("2d");
+  if (scoreChart) scoreChart.destroy();
+  if (langChart) langChart.destroy();
+  scoreChart = new Chart(ctx1, {
+    type: "bar",
+    data: {
+      labels: builders.slice(0,8).map(b => b.username),
+      datasets: [{ label: "Builder Score", data: builders.slice(0,8).map(b => b.score), backgroundColor: builders.slice(0,8).map((_,i) => i===0?"rgba(251,191,36,0.7)":"rgba(99,102,241,0.6)"), borderColor: builders.slice(0,8).map((_,i) => i===0?"#fbbf24":"#6366f1"), borderWidth:1, borderRadius:4 }]
+    },
+    options: { responsive:true, maintainAspectRatio:true, plugins:{ legend:{display:false}, title:{display:true,text:"Builder Scores",color:"#a78bfa",font:{family:"Orbitron",size:12}} }, scales:{ x:{ticks:{color:"#64748b",font:{size:9}},grid:{color:"rgba(255,255,255,0.03)"}}, y:{ticks:{color:"#64748b"},grid:{color:"rgba(255,255,255,0.05)"},max:100} } }
+  });
+  const langMap = {};
+  builders.forEach(b => { const l = b.topLanguage; if(l) langMap[l]=(langMap[l]||0)+1; });
+  const langEntries = Object.entries(langMap).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  langChart = new Chart(ctx2, {
+    type: "doughnut",
+    data: { labels: langEntries.map(e=>e[0]), datasets:[{data:langEntries.map(e=>e[1]),backgroundColor:["#6366f1","#22d3ee","#a78bfa","#10b981","#f59e0b","#ef4444"],borderWidth:0}] },
+    options: { responsive:true, maintainAspectRatio:true, plugins:{ legend:{position:"right",labels:{color:"#94a3b8",font:{size:11}}}, title:{display:true,text:"Top Languages",color:"#a78bfa",font:{family:"Orbitron",size:12}} } }
+  });
+}
+
+function renderArchive(reports) {
+  const list = document.getElementById("reportsList");
+  if (!reports.length) { list.innerHTML = `<div class="loading">No archive yet.</div>`; return; }
+  list.innerHTML = reports.slice(0,20).map(r => `
+    <div class="report-item" onclick="loadReport('${r.date}${r.type==='weekly'?'-weekly':''}','${r.type}')">
+      <span class="report-date">${r.date}</span>
+      <span class="report-type ${r.type}">${r.type==='weekly'?'📅 Weekly':'📆 Daily'}</span>
+      <span class="report-meta">${r.stats?.builders_tracked||0} builders · ⭐ ${(r.stats?.total_stars||0).toLocaleString()}</span>
+      <span style="color:#64748b;font-size:18px">›</span>
+    </div>
+  `).join("");
+}
+
+(function() {
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+  let stars = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  function init() {
+    resize();
+    stars = Array.from({length:150}, () => ({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.5+0.3, a:Math.random(), speed:Math.random()*0.3+0.1 }));
+  }
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    stars.forEach(s => {
+      s.a += s.speed * 0.01;
+      const alpha = (Math.sin(s.a)+1)/2*0.6+0.1;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(99,102,241,${alpha})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener("resize", init);
+  init(); draw();
+})();
+
+loadLatestReport();
+</script>
+</body>
+</html>

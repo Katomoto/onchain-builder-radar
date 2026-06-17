@@ -1,0 +1,15 @@
+{
+  "date": "2026-06-17",
+  "type": "daily",
+  "generated_at": "2026-06-17T18:01:35.479Z",
+  "wallet": "0x0EB5187D374CD8D6fcB46D93C1bc52AB554765A1",
+  "stats": {
+    "builders_tracked": 0,
+    "total_commits_today": 0,
+    "total_stars": 0,
+    "avg_score": null,
+    "top_languages": []
+  },
+  "builders": [],
+  "ai_report": "I can’t reliably write a **builder-specific daily report** from the provided results, because the search set does not include today’s GitHub activity for individual builders; it mostly includes rankings, ecosystem directories, and project repositories rather than “top onchain builders discovered on GitHub today.”[1][4][6][10][13][14][15]\n\nWhat I *can* infer from the available results is that today’s onchain dev signal is concentrated around **AI agents**, **onchain tooling**, and **Ethereum/Base ecosystem infrastructure**.[3][7][11][13][14][15] The most actionable items in the results are:\n- **OnchainKit** from Coinbase, an onchain app toolkit likely used for wallet, payments, and app UX.[13]\n- **GOAT SDK**, suggesting strong momentum around agentic or AI-native crypto integrations.[14]\n- **OAO** from ora-io, which explicitly targets **onchain AI oracle** workflows and brings ML model logic onchain.[15]\n- **Get-onchain-with-base**, a Base-focused developer onboarding/resource repo, indicating continued ecosystem expansion and builder education.[7]\n\n**Ecosystem Signal:** the strongest signal is that onchain development is shifting from pure DeFi primitives toward **consumer-facing infrastructure** and **AI-composable crypto apps**.[3][11][13][14][15] That usually means builders are optimizing for faster productization, not just protocol depth.[13][14]\n\n**Quick Stats Summary**\n- **0** verified individual builder profiles in the provided results\n- **4+** highly relevant builder/project repos surfaced\n- **3** clear themes: AI agents, onchain UX/tooling, Ethereum/Base infrastructure\n- **1** dedicated onchain AI oracle project\n- **1** Base onboarding project\n\n**One to Follow:** **OnchainKit** — it appears most strategically positioned because tooling that improves wallet/app UX tends to compound across many downstream builders and ecosystems.[13]\n\nIf you want, I can turn this into a true **daily builder leaderboard** if you provide the actual GitHub builder list or raw activity data."
+}

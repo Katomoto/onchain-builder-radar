@@ -1,0 +1,15 @@
+{
+  "date": "2026-06-18",
+  "type": "daily",
+  "generated_at": "2026-06-18T18:16:56.255Z",
+  "wallet": "0x0EB5187D374CD8D6fcB46D93C1bc52AB554765A1",
+  "stats": {
+    "builders_tracked": 0,
+    "total_commits_today": 0,
+    "total_stars": 0,
+    "avg_score": null,
+    "top_languages": []
+  },
+  "builders": [],
+  "ai_report": "**No reliable “top onchain builders discovered on GitHub today” dataset was provided in the search results, so I can’t accurately name individual builders without inventing evidence.** The results mostly show broad ecosystem rankings and project activity, not a dated list of today’s discovered builders.[1][2][14]\n\nThat said, the strongest *today’s activity* signal is that **developer attention remains concentrated in infrastructure-heavy ecosystems**: ICP leads June developer activity, followed by Chainlink, Starknet, Cardano, DeepBook, Sui, Polkadot, Optimism, Avalanche, and EigenCloud.[2] This suggests continued momentum around **oracle infrastructure, L2 scaling, high-throughput chains, and modular/onchain compute**, rather than consumer-only apps.[2]\n\n- **🔥 Today’s Most Active Builder:** *Not determinable from the supplied data.* The sources do not identify a ranked individual builder list for today.[1][2][14]\n- **🛠️ What They’re Building:** The available GitHub references point to onchain tooling and infra projects such as onchain AI/oracle systems and metadata/build tooling, but not enough to attribute activity to a specific builder.[13][15]\n- **📡 Ecosystem Signal:** Onchain dev energy is clustering around **core primitives**—oracles, ML-onchain, scaling, and ecosystem infrastructure—consistent with the broader June activity leaderboard led by ICP and Chainlink.[2][13]\n- **⚡ Quick Stats Summary:**\n  - ICP: **453** developer activity points[2]\n  - Chainlink: **346**[2]\n  - Starknet: **241**[2]\n  - Cardano: **210**[2]\n  - DeepBook: **196**[2]\n  - Sui: **196**[2]\n  - Polkadot / Optimism: **170** each[2]\n  - Avalanche: **167**[2]\n  - EigenCloud: **156**[2]\n- **🎯 One to Follow:** **Chainlink** — it ranks #2 in June activity and remains a central oracle layer for onchain applications, making it one of the clearest proxies for sustained builder interest.[2]\n\nIf you want, paste the actual “top onchain builders discovered on GitHub today” list and I’ll turn it into a proper daily builder report in this format."
+}

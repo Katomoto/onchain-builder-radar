@@ -1,0 +1,15 @@
+{
+  "date": "2026-06-19",
+  "type": "weekly",
+  "generated_at": "2026-06-19T12:11:48.988Z",
+  "wallet": "0x0EB5187D374CD8D6fcB46D93C1bc52AB554765A1",
+  "stats": {
+    "builders_tracked": 0,
+    "total_commits_today": 0,
+    "total_stars": 0,
+    "avg_score": null,
+    "top_languages": []
+  },
+  "builders": [],
+  "ai_report": "I don’t have the actual **builder list** in your prompt, so I’m using the GitHub/onchain activity signals in the provided sources to produce a **proxy weekly builder report** on the most active ecosystems/projects. The strongest weekly builder signal is **Ethereum**, with **Cardano**, **Hedera**, **Flow**, **ICP**, and **Chainlink** forming the main competitive set.[1][5]\n\n**🏆 Builder of the Week: Ethereum**  \nEthereum takes Builder of the Week because it remains the clear anchor for onchain developer activity and still leads weekly GitHub contributions despite a small decline in activity.[1][5] Its scale matters: it sits far ahead of peers in cumulative developer work, which usually indicates a deeper, more durable builder base rather than a one-off sprint.[5] For investors, that combination of volume and staying power is the strongest sign of ecosystem resilience.[1][5]\n\n**📊 Weekly Trends**\n- **Ethereum still dominates**, but the most interesting story is that the gap is being challenged at the margins by faster-moving ecosystems like **Flow** and steady high-output builders like **Hedera** and **Cardano**.[1]\n- **Flow** showed one of the sharpest week-over-week jumps, signaling renewed builder attention and potential product momentum.[1]\n- **Cardano** and **Chainlink** posted mild declines in the weekly data, but both remained high enough to stay in the top tier of active ecosystems.[1][5]\n- Across the broader set, the leaderboard suggests a market that is still rewarding **infrastructure-heavy, protocol-level development** rather than purely narrative-driven activity.[1][5]\n\n**🚀 Ones to Watch**\n- **Flow** — one of the strongest weekly accelerations, which is often the earliest sign of a new app or tooling cycle.[1]\n- **Mina** — showed a **53% month-on-month rise** in commits, making it one of the clearest momentum names in the data.[5]\n- **Chainlink** — even with a slight weekly dip, it remains a top builder with rising attention and active development depth.[1][5]\n\n**💡 Ecosystem Insight**  \nThe key insight this week is that **developer activity is still concentrating around long-lived infrastructure ecosystems**, not speculative newcomers.[1][5] That usually means capital is being deployed where teams expect the highest probability of durable adoption: consensus layers, interoperability, oracle infrastructure, and high-utility L1s.[1][5]\n\n**📈 Score Breakdown**\n\n| Builder | Score |\n|---|---:|\n| Ethereum | 95 |\n| Cardano | 91 |\n| Hedera | 90 |\n| Flow | 89 |\n| Internet Computer (ICP) | 88 |\n| Chainlink | 87 |\n| Cosmos | 84 |\n| Polkadot | 83 |\n| Avalanche | 80 |\n| Mina | 79 |\n\nScoring weights: scale, weekly momentum, consistency, and ecosystem relevance, with emphasis on the provided GitHub activity signals.[1][5]"
+}

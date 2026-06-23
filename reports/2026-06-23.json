@@ -1,0 +1,15 @@
+{
+  "date": "2026-06-23",
+  "type": "daily",
+  "generated_at": "2026-06-23T11:22:20.850Z",
+  "wallet": "0x0EB5187D374CD8D6fcB46D93C1bc52AB554765A1",
+  "stats": {
+    "builders_tracked": 0,
+    "total_commits_today": 0,
+    "total_stars": 0,
+    "avg_score": null,
+    "top_languages": []
+  },
+  "builders": [],
+  "ai_report": "### DAILY BUILDER REPORT\n\n**1. 🔥 Today's Most Active Builder**  \n**ORA** stands out as today’s most active onchain builder. Hosted under the `ora-io` org, its core project **OAO (Onchain AI Oracle)** leverages **opML (optimistic machine learning)** to run ML models directly on Ethereum. ORA pairs this with the **GOAT SDK**, enabling developers to trustlessly deploy and verify AI-driven logic onchain.\n\n**2. 🛠️ What They're Building**  \n- **OAO (Onchain AI Oracle)**:  \n  - Runs ML models (e.g., price forecasting, intent prediction) on Ethereum via optimistic rollups and model verification.  \n  - Enables **trustless AI–smart contract integration**, crucial for DeFi, insurance, and autonomous agents.  \n- **GOAT SDK** (`goat-sdk`):  \n  - Modular toolkit for **onchain AI workflows**, including model deployment, inference validation, and circuit tooling.  \n  - Lowers the barrier for AI–blockchain builders, absorbing infrastructure complexity.  \n\nPotential: ORA could become the **de facto standard for trustless AI in Web3**, positioning itself at the intersection of onchain ML, DeFi, and autonomous agents.\n\n**3. 📡 Ecosystem Signal**  \nToday’s activity highlights a shift toward **onchain intelligence** and **infrastructure-aware development**. Projects like **ORA/OAO**, **Coinbase’s onchainkit**, and **Base-focused builders** signal rising demand for:  \n- **Onchain ML/data oracles** (beyond simple price feeds).  \n- **Composable onchain primitives** for UX (e.g., wallets, UI kits).  \n- **Base and Ethereum L2s** as the preferred environment for core onchain building.  \n\nDeveloper activity is increasingly concentrated on **AI–blockchain primitives and infrastructure**, not just apps.\n\n**4. ⚡ Quick Stats Summary**  \n- ORA leads in **conceptual novelty** with onchain ML via opML.  \n- Coinbase’s **onchainkit** (React components, TS utilities) reflects strong institutional builder support.  \n- Base-focused projects (e.g., **Quillhash's get-onchain-with-base**) show rising dev activity on L2s.  \n- GitHub topic activity for **onchain** and **on-chain-data** remains steady, confirming infrastructure focus.\n\n**5. 🎯 One to Follow**  \n**ORA** is today’s most promising builder. Its fusion of **onchain ML with Ethereum** via OAO and GOAT positions it to shape the next wave of **autonomous, AI-driven protocols**. Track ORA’s GitHub stars, research publications, and mainnet deployments for leading signals in onchain AI."
+}

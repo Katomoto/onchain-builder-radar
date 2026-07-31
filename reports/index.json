@@ -1,6 +1,17 @@
 {
   "reports": [
     {
+      "date": "2026-07-31",
+      "type": "weekly",
+      "stats": {
+        "builders_tracked": 0,
+        "total_commits_today": 0,
+        "total_stars": 0,
+        "avg_score": null,
+        "top_languages": []
+      }
+    },
+    {
       "date": "2026-07-30",
       "type": "daily",
       "stats": {
@@ -430,5 +441,5 @@
       }
     }
   ],
-  "last_updated": "2026-07-30T11:03:52.202Z"
+  "last_updated": "2026-07-31T10:43:01.676Z"
 }

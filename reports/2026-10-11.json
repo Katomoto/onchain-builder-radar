@@ -1,7 +1,7 @@
 {
   "date": "2026-10-11",
   "type": "daily",
-  "generated_at": "2026-10-11T14:46:51.997Z",
+  "generated_at": "2026-10-11T15:18:23.751Z",
   "wallet": "0x0EB5187D374CD8D6fcB46D93C1bc52AB554765A1",
   "stats": {
     "builders_tracked": 0,
@@ -11,5 +11,5 @@
     "top_languages": []
   },
   "builders": [],
-  "ai_report": "Looks like the builder data didn't come through — there's nothing after the colon, so I have no GitHub profiles, repos, or metrics to analyze.\n\nRather than fabricate names, repos, and stats (which would make the report worthless as real intel), send me the input and I'll turn it around immediately. Any of these works:\n\n- **GitHub usernames or repo URLs** from your discovery pipeline\n- **Raw metrics**: commits, stars, forks, new repos, primary languages, last-push timestamps\n- **A leaderboard/table export** from whatever tool surfaced them\n\nOnce you paste it, you'll get the report in your exact format:\n\n1. 🔥 Most Active Builder — standout pick + rationale\n2. 🛠️ What They're Building — key repos and potential\n3. 📡 Ecosystem Signal — what today's activity says about the space\n4. ⚡ Quick Stats — key numbers in bullets\n5. 🎯 One to Follow — top pick\n\nAll under 400 words, data-driven, no filler.\n\nOne transparency note: I can't browse GitHub live, so the analysis will be exactly as good as the data you share — the more context (commit dates, README snippets, ecosystem tags like Base/Solana/Ethereum), the sharper the signal read."
+  "ai_report": "The builder data didn't come through — your message ends at \"discovered on GitHub today:\" with no names, repos, or stats attached.\n\nRather than invent GitHub profiles, commit counts, and project names (which would make the report useless — or worse, misleading if published), I need the actual source data. Paste any of the following and I'll produce the full report immediately:\n\n- **GitHub usernames or profile URLs**\n- **Repo names + descriptions**\n- **Activity metrics** (commits today/this week, stars, forks, contributors)\n- **Languages / frameworks** (Solidity, Rust, Move, etc.)\n- **Ecosystem tags** (Ethereum, Solana, Base, Monad, etc.)\n\nOnce I have the data, here's the exact structure I'll deliver:\n\n---\n\n**DAILY B"
 }

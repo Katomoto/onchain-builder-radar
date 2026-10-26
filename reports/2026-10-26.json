@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-26",
+  "type": "daily",
+  "generated_at": "2026-10-26T14:58:57.864Z",
+  "wallet": "0x0EB5187D374CD8D6fcB46D93C1bc52AB554765A1",
+  "stats": {
+    "builders_tracked": 0,
+    "total_commits_today": 0,
+    "total_stars": 0,
+    "avg_score": null,
+    "top_languages": []
+  },
+  "builders": [],
+  "ai_report": "⚠️ **Missing Data Notice**\n\nYou asked me to analyze \"these top onchain builders\" but no GitHub data, repo lists, or builder profiles were actually included in your message. I can't fabricate activity stats or project names without real data — that would undermine the report's credibility.\n\n**To proceed, please share any of the following:**\n- A list of GitHub usernames/commits pulled today\n- Exported data from your discovery tool (e.g., Dune query, GitHub API output)\n- Repo URLs with activity metrics\n\n**Meanwhile, here's the exact report structure I'll populate once you paste the data:**\n\n---\n\n# 📋 DAILY BUILDER REPORT — [DATE]\n\n**1. 🔥 Today's Most Active Builder**\n- [Username] — [X] commits across [Y] repos in 24h\n- Why they stand out: [commit velocity, repo novelty, ecosystem relevance]\n\n**2. 🛠️ What They're Building**\n- [Repo 1]: [description] — potential: [category: DeFi/infra/tooling]\n- [Repo 2]: [description] — traction signals: [stars/forks/contributors]\n\n**3. 📡 Ecosystem Signal**\n- [Trend read: e.g., surge in L2 tooling, restaking infra, agent frameworks]\n\n**4. ⚡ Quick Stats**\n- Total commits: [n]\n- Active repos: [n]\n- Top chains touched: [list]\n- New repo launches: [n]\n\n**5. 🎯 One to Follow**\n- [Username] — rationale: [early-stage signal, consistent cadence, unique niche]\n\n---\n\n**Pro tips for the data pull:**\n- Include commit timestamps (so I can weight for *today* vs. weekly)\n- Star/fork counts help distinguish traction from noise\n- Chain/repo tags (Solidity, Move, Rust, zk-tooling) let me spot ecosystem shifts\n\nPaste the data and I'll deliver the full report in under 400 words, same format."
+}

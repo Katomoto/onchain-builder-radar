@@ -1,6 +1,17 @@
 {
   "reports": [
     {
+      "date": "2026-11-05",
+      "type": "daily",
+      "stats": {
+        "builders_tracked": 0,
+        "total_commits_today": 0,
+        "total_stars": 0,
+        "avg_score": null,
+        "top_languages": []
+      }
+    },
+    {
       "date": "2026-11-04",
       "type": "daily",
       "stats": {
@@ -978,18 +989,7 @@
         "avg_score": null,
         "top_languages": []
       }
-    },
-    {
-      "date": "2026-08-07",
-      "type": "weekly",
-      "stats": {
-        "builders_tracked": 0,
-        "total_commits_today": 0,
-        "total_stars": 0,
-        "avg_score": null,
-        "top_languages": []
-      }
     }
   ],
-  "last_updated": "2026-11-04T16:47:56.852Z"
+  "last_updated": "2026-11-05T16:17:45.955Z"
 }
